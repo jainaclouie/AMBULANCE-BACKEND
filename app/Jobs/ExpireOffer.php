@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\Dispatch;
 use App\Services\DispatchService;
+use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
@@ -12,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
 /** Runs when the 60-second window ends. If the crew has not answered, escalate to the next unit. */
 class ExpireOffer implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public function __construct(public int $dispatchId)
     {
